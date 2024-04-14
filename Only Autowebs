@@ -1,0 +1,31 @@
+// ==UserScript==
+// @name         GetcourseOnlyAutoweb
+// @namespace    http://tampermonkey.net/
+// @description  Отображать только автовебинары во вкладке "Вебинары"
+// @author       SailorLekalo
+// @match        *://ВАШ ДОМЕН.getcourse.ru/pl/webinar/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=getcourse.ru
+// ==/UserScript==
+
+var div = document.createElement("div");
+div.innerHTML = '<input type="checkbox" id="onlyAuto" name="onlyAuto" onclick="onlyAutos()" style="margin-right: 4px;"/><label for="scales">Только автовебинары</label>';
+document.getElementsByClassName('webinar-index')[0].insertBefore(div, document.getElementsByClassName('table')[0]);
+
+
+window.onlyAutos = function () {
+    if (document.getElementById('onlyAuto').checked) {
+        let all = document.getElementsByClassName('webinar-item');
+        for (let i = 0, max = all.length; i < max; i++) {
+            let a = all[i].children;
+            if (a[3].innerHTML.indexOf('Прямой эфир') != -1) {
+                all[i].style.display = "none";
+            }
+        }
+    } else {
+        let all = document.getElementsByClassName('webinar-item');
+        for (let i = 0, max = all.length; i < max; i++) {
+            let a = all[i].children;
+            all[i].style.display = "table-row";
+        }
+    }
+}
