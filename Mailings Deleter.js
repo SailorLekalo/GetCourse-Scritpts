@@ -20,7 +20,6 @@ window.removeAll = function(){
 }
 
 document.getElementById('w2-filters').innerHTML += '<a class="btn btn-danger btn-sm" name="delete_all" onclick=removeAll()>DELALL</a>'
-
 var matches = document.querySelectorAll('#w2-container table tbody tr');
 for(var i = 0; i < matches.length; i++) {
     var mailid = ($(matches[i]).attr('data-key'));
